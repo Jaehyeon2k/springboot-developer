@@ -1,4 +1,4 @@
-package me.jhkim.springbootdeveloper;
+package me.jhkim.springdeveloper;
 
 public class Student {
     private String firstName;
