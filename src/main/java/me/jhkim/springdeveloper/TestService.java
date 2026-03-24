@@ -10,7 +10,13 @@ public class TestService {
 
     @Autowired // bean 주입 (자동 할당)
     TestRepository memberRepository;
+
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
+    }
+
+    public Member saveMember(Member member) {
+        return memberRepository.save(member);
+
     }
 }
