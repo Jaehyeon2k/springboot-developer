@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import me.jhkim.springdeveloper.dao.Article;
 import me.jhkim.springdeveloper.dto.AddArticleRequest;
 import me.jhkim.springdeveloper.repository.BlogRepository;
+import me.jhkim.springdeveloper.service.BlogService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,8 @@ public class BlogApiControllerTest {
 
     @Autowired
     private BlogRepository blogRepository;
+    @Autowired
+    private BlogService blogService;
 
     // 추가: 매 테스트 실행 전 DB를 초기화하여 데이터 간섭을 방지합니다.
     @BeforeEach
@@ -64,27 +67,54 @@ public class BlogApiControllerTest {
         assertThat(articles.get(0).getContent()).isEqualTo(content);
     }
 
-    @DisplayName("findAllArticles: 블로그 글 목록 조회에 성공한다.")
+    @DisplayName("findAllArticles: 블로그 글 생성")
     @Test
-    public void findAllArticles() throws Exception {
-        // given
+    public void findAllAriticles() throws Exception {
+        // given : 데이터를 하나 삽입
+        // blogRepository.save(new Article("title", "content"));
         final String url = "/api/articles";
-        final String title = "제목이요";
-        final String content = "내용이요";
-
         blogRepository.save(Article.builder()
+                .title("title")
+                .content("content")
+                .build());
+
+        // when : get 방식으로 /api/article
+        final ResultActions resultActions = mockMvc
+                .perform(get(url)
+                .accept(MediaType.APPLICATION_JSON));
+
+        // then : status OK이고 읽어온 데이터와 내용이 내가 삽입한 내용과 동일하다
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].content").value("content"))
+                .andExpect(jsonPath("$[0].title").value("title"));
+    }
+
+    @DisplayName("findArticle: 블로그 글 조회에 성공한다.")
+    @Test
+    public void findArticle() throws Exception{
+        // given (데이터 준비: 블로그글 하나 생성)
+        final String url = "/api/articles/{id}";
+        final String title = "블로그 제목";
+        final String content = "블로그 내용";
+
+        Article savedArticle = blogRepository.save(Article.builder()
                 .title(title)
                 .content(content)
                 .build());
-
-        // when
-        final ResultActions resultActions = mockMvc.perform(get(url)
+        // when (실행: 위에서 생성된 블로그글을 조회)
+                final ResultActions resultActions = mockMvc.perform(get(url, savedArticle.getId())
                 .accept(MediaType.APPLICATION_JSON));
 
-        // then
-        resultActions
+        // then (검증: status가 200이고 조회한 블로그 제목과 내용이 위에서
+        //            삽입한 그것과 동일한지 확인
+                resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].content").value(content))
-                .andExpect(jsonPath("$[0].title").value(title));
+                .andExpect(jsonPath("$.content").value(content))
+                .andExpect(jsonPath("$.title").value(title));
+                // 반한된 json 객체의 content 값이 변수 content와 동일하고
+                // 반환된 json 객체의 title 값이 변수 title과 동일한지 확인
     }
+
+
 }
