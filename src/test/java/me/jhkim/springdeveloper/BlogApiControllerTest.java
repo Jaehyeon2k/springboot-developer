@@ -3,6 +3,7 @@ package me.jhkim.springdeveloper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.jhkim.springdeveloper.dao.Article;
 import me.jhkim.springdeveloper.dto.AddArticleRequest;
+import me.jhkim.springdeveloper.dto.UpdateArticleRequest;
 import me.jhkim.springdeveloper.repository.BlogRepository;
 import me.jhkim.springdeveloper.service.BlogService;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,9 +18,9 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -116,5 +117,55 @@ public class BlogApiControllerTest {
                 // 반환된 json 객체의 title 값이 변수 title과 동일한지 확인
     }
 
+    @DisplayName("deleteArticle: 블로그 글 삭제에 성곤한다.")
+    @Test
+    public void deleteArticle() throws Exception {
+        // given
 
+        final String url = "/api/articles/{id}";
+        final  String title = "4월 16일";
+        final String content = "백엔드 프로그래밍(II) 수업";
+        Article savedarticle = blogRepository.save(
+                Article
+                .builder()
+                .title(title)
+                .content(content)
+                .build());
+        // when
+        mockMvc.perform(delete(url, savedarticle.getId())).andExpect(status().isOk());
+        // then
+        List<Article> articles = blogRepository.findAll();
+        assertThat(articles).isEmpty();
+    }
+    @DisplayName("updateArticle: 블로그 글 수정에 성공한다")
+    @Test
+    public void updateArticle() throws Exception {
+        // given: 레코드 생성, 변경내용 작성
+        final String url = "/api/articles/{id}";
+        final String title = "title";
+        final String content = "content";
+
+        Article savedArticle = blogRepository.save(Article
+                .builder()
+                .title(title)
+                .content(content)
+                .build()
+        );
+        final String newTitle = "JUnit에서 제목 변경";
+        final String newContent = "JUnit에서 내용 변경";
+
+        UpdateArticleRequest request = new UpdateArticleRequest(newTitle, newContent);
+
+        // when: /api/articles/생성된 레코드 id -> put 방식 요청
+        ResultActions result = mockMvc.perform(put(url, savedArticle.getId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(request)));
+
+        // then: status code가 200, repository에서 변경된 내용 검증
+        result.andExpect(status().isOk());
+        Article updatedArticle = blogRepository.findById(savedArticle.getId()).get();
+        assertThat(updatedArticle.getTitle()).isEqualTo(newTitle);
+        assertThat(updatedArticle.getContent()).isEqualTo(newContent);
+
+    }
 }

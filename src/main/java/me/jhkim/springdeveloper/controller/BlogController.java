@@ -2,8 +2,9 @@ package me.jhkim.springdeveloper.controller;
 
 import lombok.RequiredArgsConstructor;
 import me.jhkim.springdeveloper.dao.Article;
-import me.jhkim.springdeveloper.dao.ArticleResponse;
 import me.jhkim.springdeveloper.dto.AddArticleRequest;
+import me.jhkim.springdeveloper.dto.ArticleResponse;
+import me.jhkim.springdeveloper.dto.UpdateArticleRequest;
 import me.jhkim.springdeveloper.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,19 @@ public class BlogController {
     public ResponseEntity<ArticleResponse> getArticleById(@PathVariable Long id) {
         Article article = blogService.findById(id);
         return ResponseEntity.ok().body(new ArticleResponse(article));
+    }
+
+    @DeleteMapping("api/articles/{id}")
+    public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
+        blogService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("api/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable Long id,
+                                                 @RequestBody UpdateArticleRequest request) {
+        Article article = blogService.update(id, request);
+        return ResponseEntity.ok().body(article);
     }
 }
 
