@@ -1,11 +1,11 @@
-package me.scpark.springdeveloper.controller;
+package me.jhkim.springdeveloper.controller;
 
 import lombok.RequiredArgsConstructor;
-import me.scpark.springdeveloper.domain.Article;
-import me.scpark.springdeveloper.dto.AddArticleRequest;
-import me.scpark.springdeveloper.dto.ArticleResponse;
-import me.scpark.springdeveloper.dto.UpdateArticleRequest;
-import me.scpark.springdeveloper.service.BlogService;
+import me.jhkim.springdeveloper.domain.Article;
+import me.jhkim.springdeveloper.dto.AddArticleRequest;
+import me.jhkim.springdeveloper.dto.ArticleResponse;
+import me.jhkim.springdeveloper.dto.UpdateArticleRequest;
+import me.jhkim.springdeveloper.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

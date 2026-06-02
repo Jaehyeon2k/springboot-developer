@@ -1,10 +1,10 @@
-package me.scpark.springdeveloper.controller;
+package me.jhkim.springdeveloper.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.scpark.springdeveloper.domain.Article;
-import me.scpark.springdeveloper.dto.AddArticleRequest;
-import me.scpark.springdeveloper.dto.UpdateArticleRequest;
-import me.scpark.springdeveloper.repository.BlogRepository;
+import me.jhkim.springdeveloper.domain.Article;
+import me.jhkim.springdeveloper.dto.AddArticleRequest;
+import me.jhkim.springdeveloper.dto.UpdateArticleRequest;
+import me.jhkim.springdeveloper.repository.BlogRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

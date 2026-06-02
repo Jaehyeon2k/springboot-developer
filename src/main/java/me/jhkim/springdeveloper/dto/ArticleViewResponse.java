@@ -1,8 +1,8 @@
-package me.scpark.springdeveloper.dto;
+package me.jhkim.springdeveloper.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import me.scpark.springdeveloper.domain.Article;
+import me.jhkim.springdeveloper.domain.Article;
 
 import java.time.LocalDateTime;
 

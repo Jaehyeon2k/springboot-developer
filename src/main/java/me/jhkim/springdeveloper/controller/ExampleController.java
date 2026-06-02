@@ -1,4 +1,4 @@
-package me.scpark.springdeveloper.controller;
+package me.jhkim.springdeveloper.controller;
 
 import lombok.Getter;
 import lombok.Setter;

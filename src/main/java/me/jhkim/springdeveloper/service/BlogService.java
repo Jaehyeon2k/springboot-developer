@@ -1,10 +1,10 @@
-package me.scpark.springdeveloper.service;
+package me.jhkim.springdeveloper.service;
 
 import lombok.RequiredArgsConstructor;
-import me.scpark.springdeveloper.domain.Article;
-import me.scpark.springdeveloper.dto.AddArticleRequest;
-import me.scpark.springdeveloper.dto.UpdateArticleRequest;
-import me.scpark.springdeveloper.repository.BlogRepository;
+import me.jhkim.springdeveloper.domain.Article;
+import me.jhkim.springdeveloper.dto.AddArticleRequest;
+import me.jhkim.springdeveloper.dto.UpdateArticleRequest;
+import me.jhkim.springdeveloper.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

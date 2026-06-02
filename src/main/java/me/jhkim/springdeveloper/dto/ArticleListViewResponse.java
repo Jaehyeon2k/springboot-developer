@@ -1,7 +1,7 @@
-package me.scpark.springdeveloper.dto;
+package me.jhkim.springdeveloper.dto;
 
 import lombok.Getter;
-import me.scpark.springdeveloper.domain.Article;
+import me.jhkim.springdeveloper.domain.Article;
 
 @Getter
 public class ArticleListViewResponse {

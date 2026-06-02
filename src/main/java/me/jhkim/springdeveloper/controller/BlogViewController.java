@@ -1,10 +1,10 @@
-package me.scpark.springdeveloper.controller;
+package me.jhkim.springdeveloper.controller;
 
 import lombok.RequiredArgsConstructor;
-import me.scpark.springdeveloper.domain.Article;
-import me.scpark.springdeveloper.dto.ArticleListViewResponse;
-import me.scpark.springdeveloper.dto.ArticleViewResponse;
-import me.scpark.springdeveloper.service.BlogService;
+import me.jhkim.springdeveloper.domain.Article;
+import me.jhkim.springdeveloper.dto.ArticleListViewResponse;
+import me.jhkim.springdeveloper.dto.ArticleViewResponse;
+import me.jhkim.springdeveloper.service.BlogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

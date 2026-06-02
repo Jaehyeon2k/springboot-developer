@@ -1,4 +1,4 @@
-package me.scpark.springdeveloper.domain;
+package me.jhkim.springdeveloper.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
