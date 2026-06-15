@@ -1,6 +1,6 @@
 package me.jhkim.springdeveloper.repository;
 
-import me.jhkim.springdeveloper.domain.User;
+import me.jhkim.springdeveloper.dao.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

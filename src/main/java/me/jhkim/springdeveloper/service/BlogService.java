@@ -1,7 +1,7 @@
 package me.jhkim.springdeveloper.service;
 
 import lombok.RequiredArgsConstructor;
-import me.jhkim.springdeveloper.domain.Article;
+import me.jhkim.springdeveloper.dao.Article;
 import me.jhkim.springdeveloper.dto.AddArticleRequest;
 import me.jhkim.springdeveloper.dto.UpdateArticleRequest;
 import me.jhkim.springdeveloper.repository.BlogRepository;

@@ -1,7 +1,7 @@
 package me.jhkim.springdeveloper.service;
 
 import lombok.RequiredArgsConstructor;
-import me.jhkim.springdeveloper.domain.User;
+import me.jhkim.springdeveloper.dao.User;
 import me.jhkim.springdeveloper.dto.AddUserRequest;
 import me.jhkim.springdeveloper.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +15,7 @@ public class UserService {
     public Long save(AddUserRequest dto) {
         return userRepository.save(User.builder()
                 .email(dto.getEmail())
+
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
                 .build()).getId();
     }

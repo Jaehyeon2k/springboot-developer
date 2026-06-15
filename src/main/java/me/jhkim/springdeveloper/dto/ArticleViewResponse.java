@@ -2,7 +2,7 @@ package me.jhkim.springdeveloper.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import me.jhkim.springdeveloper.domain.Article;
+import me.jhkim.springdeveloper.dao.Article;
 
 import java.time.LocalDateTime;
 
@@ -13,11 +13,13 @@ public class ArticleViewResponse {
     private String title;
     private String content;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public ArticleViewResponse(Article article) {
+    public ArticleViewResponse (Article article) {
         this.id = article.getId();
         this.title = article.getTitle();
         this.content = article.getContent();
         this.createdAt = article.getCreatedAt();
+        this.updatedAt = article.getUpdatedAt();
     }
 }

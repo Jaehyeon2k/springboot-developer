@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.jhkim.springdeveloper.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import me.jhkim.springdeveloper.domain.User;
+import me.jhkim.springdeveloper.dao.User;
 
 @RequiredArgsConstructor
 @Service
